@@ -1,0 +1,99 @@
+/* Main Component */
+.cards_row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Card_01 */
+.card1 {
+  /* width: 500px; */
+  border: none;
+  color: white;
+  background: transparent;
+}
+.card_01_content {
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+.heading {
+  font-size: 50px;
+}
+.links {
+  width: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.link {
+  gap: 8px;
+  display: flex;
+  color: #f58b22;
+  font-weight: bold;
+}
+.links svg {
+  width: 15px;
+}
+
+/* Card_02 */
+.card2 {
+  height: 200px;
+  color: white;
+  background: transparent;
+  background-image: linear-gradient(
+    90deg,
+    rgba(255, 162, 70, 1),
+    rgba(245, 139, 34, 1),
+    rgba(220, 36, 88, 1)
+  );
+  border: none;
+  border-radius: 35px;
+}
+.card_02_content {
+  gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+.title {
+  font-weight: 900;
+}
+.input_button {
+  gap: 1rem;
+  /* width: 450px; */
+  display: flex;
+  justify-content: space-between;
+}
+.prefix {
+  gap: 5px;
+  display: flex;
+  justify-content: center;
+}
+.prefix svg {
+  fill: blue;
+}
+.input_button svg {
+  width: 25px;
+  height: 25px;
+}
+.input {
+  border: none;
+  border-radius: 15px;
+  background: bisque;
+}
+.ant-input {
+  border-radius: 15px;
+  background-color: bisque;
+}
+.contribute_btn {
+  gap: 0.3rem;
+  width: 130px;
+  height: 50px;
+  border: none;
+  display: flex;
+  font-weight: bold;
+  border-radius: 15px;
+  align-items: center;
+  background: #6c211e;
+  color: white !important;
+}

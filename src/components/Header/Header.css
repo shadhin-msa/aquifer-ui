@@ -1,0 +1,147 @@
+.header {
+  display: flex;
+  padding-top: 15px;
+  align-items: center;
+  justify-content: space-between;
+}
+.header .btns {
+  gap: 20px;
+  display: flex;
+}
+.btn {
+  width: 170px;
+  display: flex;
+  font-weight: bold;
+  border-radius: 12px;
+  color: white !important;
+  background-color: transparent;
+  justify-content: space-between;
+  border-color: white !important;
+}
+.btn svg {
+  width: 25px;
+  height: 25px;
+}
+.popup_btn {
+  width: 170px;
+  border-radius: 12px;
+  color: white !important;
+  background-color: transparent;
+  border-color: white !important;
+}
+
+/* Modal css */
+
+.modal_content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.ant-modal .ant-modal-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ant-modal .ant-modal-content {
+  background-image: linear-gradient(
+    90deg,
+    rgba(255, 162, 70, 1),
+    rgba(245, 139, 34, 1),
+    rgba(220, 36, 88, 1)
+  );
+  width: 120%;
+  border-radius: 20px;
+}
+.ant-modal svg {
+  fill: black;
+}
+.ant-modal .ant-modal-title {
+  background-image: linear-gradient(
+    90deg,
+    rgba(255, 162, 70, 1),
+    rgba(245, 139, 34, 1),
+    rgba(220, 36, 88, 1)
+  );
+}
+.title_text {
+  color: #fff;
+  text-align: center;
+}
+.text_section {
+  display: flex;
+  color: #fff;
+  justify-content: space-around;
+}
+.logo_section {
+  display: flex;
+  justify-content: space-around;
+}
+.logo12 {
+  width: 70px;
+  height: 70px;
+  display: flex;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(99, 127, 252);
+}
+.ant-modal svg.logo {
+  width: 65px;
+}
+.ant-modal svg {
+  width: 45px;
+}
+.input_section {
+  gap: 20px;
+  display: flex;
+  background: transparent;
+  justify-content: space-around;
+}
+.text_section_02 {
+  display: flex;
+  color: #fff;
+  align-items: center;
+  justify-content: space-between;
+}
+.decription {
+  width: 70%;
+  text-align: center;
+}
+.input12 {
+  height: 50px;
+  border: 2px solid white;
+  background-color: transparent;
+}
+.input12::placeholder {
+  color: #fff;
+}
+.input_amount {
+  height: 60px;
+  border: none;
+}
+.sub_section {
+  height: 30px;
+  display: flex;
+  color: #fff;
+  padding: 0 20px;
+  font-weight: bold;
+  border-radius: 12px;
+  align-items: center;
+  border: 2px solid white;
+  justify-content: space-between;
+}
+.submit_btn {
+  height: 50px;
+  border: none;
+  border-radius: 15px;
+  color: #fff !important;
+  background-color: rgb(122, 122, 189);
+}
+@media screen and (max-width: 768px) {
+  .header {
+    flex-direction: column;
+  }
+  .header .btns {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,45 @@
+.chart {
+  color: #ffffff;
+  padding: 35px;
+  border-radius: 35px;
+  border-color: red;
+  border: 1px solid #fff;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.1)
+  );
+}
+
+.apexcharts-yaxis-texts-g {
+  color: white;
+}
+
+text {
+  fill: #ffffff;
+}
+
+.apexcharts-title-text {
+  font-size: 24px;
+  padding-left: 20px;
+}
+
+.title_02 {
+  right: 10%;
+  position: absolute;
+}
+
+.apexcharts-tooltip.apexcharts-theme-light {
+  display: none;
+}
+
+.apexcharts-grid,
+.apexcharts-grid-borders {
+  opacity: 0.2;
+}
+
+/* Remove blur effect */
+.chart {
+  filter: none;
+  -webkit-filter: none;
+}
