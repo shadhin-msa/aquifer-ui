@@ -1,14 +1,65 @@
-import { useState } from "react";
-import { ReactComponent as Logo } from "../../assets/logo.svg";
+import { useState } from 'react';
+import { ReactComponent as Logo } from '../../assets/logo.svg';
 // import { ReactComponent as Atom } from "../../assets/atom.svg";
-import { ReactComponent as Osmosis } from "../../assets/osmosis.svg";
-import { ReactComponent as Discord } from "../../assets/discord.svg";
-import { Button, Modal, Input } from "antd";
+import { ReactComponent as Osmosis } from '../../assets/osmosis.svg';
+import { ReactComponent as Discord } from '../../assets/discord.svg';
+import { Button, Modal, Input, Typography } from 'antd';
+import { useAccount, useActiveChain, useDisconnect, useSuggestChainAndConnect } from 'graz';
+import { Bech32Address } from '@keplr-wallet/cosmos';
 
-import "./Header.css";
+import './Header.css';
+// import Paragraph from 'antd/es/skeleton/Paragraph';
+
+const { Paragraph } = Typography;
+
+const QWOYN = {
+  coinDenom: 'QWOYN',
+  coinMinimalDenom: 'uqwoyn',
+  coinDecimals: 6,
+  coinGeckoId: 'unknown',
+  coinImageUrl: 'https://avatars.githubusercontent.com/u/91175924?s=100&v=4',
+};
+
+const qwoynTestnet = {
+  rpc: 'http://66.42.74.12:26657',
+  rest: 'http://66.42.74.12:1317',
+  chainId: 'earendel-1',
+  chainName: 'qwoyn',
+  bip44: {
+    coinType: 118,
+  },
+  stakeCurrency: QWOYN,
+  bech32Config: Bech32Address.defaultBech32Config('qwoyn'),
+  currencies: [QWOYN],
+  feeCurrencies: [QWOYN],
+  feeCurrencies: {
+    low: 0.01,
+    average: 0.025,
+    high: 0.03,
+  },
+  features: [],
+};
 
 const Header = () => {
+  // [wallet Connection]
+  const { data: account, isConnected, isConnecting, isDisconnected, isReconnecting } = useAccount();
+  const { disconnect } = useDisconnect();
+  const activeChain = useActiveChain();
+
+  const { suggestAndConnect } = useSuggestChainAndConnect();
+  const handleWalletConnection = () => {
+    console.log('handle wallet connection called');
+    if (isConnected) disconnect();
+    else
+      suggestAndConnect({
+        chainInfo: qwoynTestnet,
+      });
+  };
+
+  // [/wallet Connection]
+
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -29,15 +80,30 @@ const Header = () => {
           <Discord />
           Discord support
         </Button>
-        <Button
+        {activeChain && <Button
           // onOk={handleOk}
           onClick={showModal}
           onCancel={handleCancel}
           className="popup_btn"
         >
-          Connect wallet
+          Deposit
+        </Button>}
+        
+
+        
+
+
+        <Button onCancel={handleCancel} className="popup_btn" loading={isConnecting || isReconnecting} disabled={isConnecting || isReconnecting} onClick={handleWalletConnection}>
+          {activeChain ? 'Disconnect' : 'Connect wallet'}
+          {activeChain && (
+          <Paragraph ellipsis={{ rows: 1 }} className="popup_btn">
+            <code>{account.bech32Address}</code>
+            {console.log({account})}
+          </Paragraph>
+        )}
         </Button>
       </div>
+
       <Modal
         // onOk={handleOk}
         // title="Deposit ATOM"
@@ -65,9 +131,7 @@ const Header = () => {
           </div>
           <div className="text_section_02">
             <h2>Select Amount</h2>
-            <h4 className="decription">
-              Available on Osmosis and the data should be pulled from the wallet
-            </h4>
+            <h4 className="decription">Available on Osmosis and the data should be pulled from the wallet</h4>
           </div>
           <Input className="input_amount" placeholder="Input" />
           <div className="sub_section">
