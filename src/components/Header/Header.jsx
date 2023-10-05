@@ -4,11 +4,12 @@ import { ReactComponent as Logo } from '../../assets/logo.svg';
 import { ReactComponent as Osmosis } from '../../assets/osmosis.svg';
 import { ReactComponent as Discord } from '../../assets/discord.svg';
 import { Button, Modal, Input, Typography } from 'antd';
-import { useAccount, useActiveChain, useDisconnect, useSuggestChainAndConnect } from 'graz';
+import { useAccount, useActiveChain, useDisconnect, useSuggestChainAndConnect, useBalances } from 'graz';
 import { Bech32Address } from '@keplr-wallet/cosmos';
 
 import './Header.css';
 // import Paragraph from 'antd/es/skeleton/Paragraph';
+
 
 const { Paragraph } = Typography;
 
@@ -46,6 +47,10 @@ const Header = () => {
   const { disconnect } = useDisconnect();
   const activeChain = useActiveChain();
 
+  
+// const address = 'cosmos1g3jjhgkyf36pjhe7u5cw8j9u6cgl8x929ej430';
+  const { data:useBalance, isLoading } = useBalances();
+
   const { suggestAndConnect } = useSuggestChainAndConnect();
   const handleWalletConnection = () => {
     console.log('handle wallet connection called');
@@ -54,6 +59,7 @@ const Header = () => {
       suggestAndConnect({
         chainInfo: qwoynTestnet,
       });
+      console.log({useBalance, account})
   };
 
   // [/wallet Connection]
@@ -80,27 +86,25 @@ const Header = () => {
           <Discord />
           Discord support
         </Button>
-        {activeChain && <Button
-          // onOk={handleOk}
-          onClick={showModal}
-          onCancel={handleCancel}
-          className="popup_btn"
-        >
-          Deposit
-        </Button>}
-        
-
-        
-
+        {activeChain && (
+          <Button
+            // onOk={handleOk}
+            onClick={showModal}
+            onCancel={handleCancel}
+            className="popup_btn"
+          >
+            Deposit
+          </Button>
+        )}
 
         <Button onCancel={handleCancel} className="popup_btn" loading={isConnecting || isReconnecting} disabled={isConnecting || isReconnecting} onClick={handleWalletConnection}>
           {activeChain ? 'Disconnect' : 'Connect wallet'}
           {activeChain && (
-          <Paragraph ellipsis={{ rows: 1 }} className="popup_btn">
-            <code>{account.bech32Address}</code>
-            {console.log({account})}
-          </Paragraph>
-        )}
+            <Paragraph ellipsis={{ rows: 1 }} className="popup_btn">
+              <code>{account.bech32Address}</code>
+              {console.log({ account })}
+            </Paragraph>
+          )}
         </Button>
       </div>
 
@@ -112,6 +116,22 @@ const Header = () => {
         footer={null}
       >
         <div className="modal_content">
+          <hr />
+          <div>
+            Balances:
+            {isLoading ? (
+              'Fetching balances...'
+            ) : (
+              <div>
+                {useBalance?.map((coin) => (
+                  <h3 key={coin.denom}>
+                    {coin.amount} {coin.denom}
+                  </h3>
+                ))}
+              </div>
+            )}
+          </div>
+          <hr />
           <h2 className="title_text">Deposit QWOYN</h2>
           <div className="text_section">
             <h3>From Cosmosis to QWOYN...</h3>
