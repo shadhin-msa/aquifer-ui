@@ -21,6 +21,12 @@ const QWOYN = {
   coinImageUrl: 'https://avatars.githubusercontent.com/u/91175924?s=100&v=4',
 };
 
+const gasPriceStep = {
+  low: 0.01,
+  average: 0.025,
+  high: 0.03,
+}
+
 const qwoynTestnet = {
   rpc: 'http://66.42.74.12:26657',
   rest: 'http://66.42.74.12:1317',
@@ -32,12 +38,8 @@ const qwoynTestnet = {
   stakeCurrency: QWOYN,
   bech32Config: Bech32Address.defaultBech32Config('qwoyn'),
   currencies: [QWOYN],
-  feeCurrencies: [QWOYN],
-  feeCurrencies: {
-    low: 0.01,
-    average: 0.025,
-    high: 0.03,
-  },
+  feeCurrencies: [{...QWOYN, gasPriceStep}],
+  gasPriceStep,
   features: [],
 };
 
